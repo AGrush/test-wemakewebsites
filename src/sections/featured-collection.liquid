@@ -12,7 +12,7 @@
   <h2>{{ collection.title | escape }}</h2>
 
   <p>{{ collection.description }}</p>
-
+  
   <div class="divsContainer">
 
     {% for product in collection.products limit: 4 %}
@@ -24,6 +24,16 @@
             {% if product.featured_image != blank %}
               {{ product.featured_image | img_url: 'large' | img_tag }}
             {% endif %}
+
+
+
+            {% for tag in product.tags %}
+              {% if tag contains 'dark-supersoft' %}
+                  <div class="sale"> <span>Sale</span></div>
+              {% endif %}
+            {% endfor %}
+                    
+            
             
             <span class="atcart" js-ajax-cart="addToCart" data-variant-id="{{ current_variant.id }}" data-quantity="1">Add to cart</span>
 
@@ -61,7 +71,7 @@
 
   </div>
 
-  <span class="viewCollection" >View Collecton</span>
+  <a href="{{ collection.url}}"><span class="viewCollection" >View Collecton</span></a>
 
   </section>
 
